@@ -160,14 +160,21 @@ yaxisNames_5 = ['Char yield (%mass of feedstock as received)',  'Char C yield (%
                'Condensate yield (% mass of feedstock as received)', 'Condensate C yield (%mass of feedstock C, as received,\n adjusted from gas composition)', 
                'Gas yield (% mass of feedstock as received, by difference)', 'Gas C yield (%mass of feedstock C, as received,\n by gas composition)']
 
+
+variables_group = [1,1,1,1,
+                   2,2,2,2,
+                   3,3,3,
+                   4,4,4,4,
+                   5,5,5,5,
+                   6,6,7,7]
 ########################################3
 #Primero Escojes las variables a poner en la matriz en yaxisToPlot
 #yaxisToPlot =yaxisToPlot_1+yaxisToPlot_3+yaxisToPlot_5+yaxisToPlot_7
 yaxisToPlot  = yaxisToPlot_13
 
 # Segundo Escoje el numero de filas i columnas
-NumberOfRows = 2
-NumberOfColumns = 3
+NumberOfRows = 3
+NumberOfColumns = 2
 
 #Tercero pudes jugar con el tamano de la figura
 FigureSize = (1*NumberOfRows,5*NumberOfColumns)
@@ -194,7 +201,8 @@ for ax in axs.ravel():
     columns = df[xaxisToPlot[0]].tolist()
     height = 100*np.array(df[ListaVariables[i]].tolist())
     error  = df[ListaVariablesSDev[i]].tolist()
-    ax = Tbx.plotBarCharts(ax,columns, height,error,bar_labels=columns)
+    ax = Tbx.plotBarCharts(ax,columns, height,error,bar_labels=columns,
+                              group_offset = 1.2, group = variables_group)
     if len(bar_labels_x)>0:
         ax.set_xlabel(xaxisToPlot)
     ax.set_ylabel('g/kg biochar')
