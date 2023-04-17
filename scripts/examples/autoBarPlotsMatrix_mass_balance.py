@@ -4,8 +4,14 @@ import pandas as pd
 import os
 import sys
 # adding source folder to the system path
-sys.path.insert(0, '/home/manuel/repos/pyroflueplots/src/')
-import ToolboxGF as Tbx
+try:
+    import ToolboxGF as Tbx
+except:
+    print('ToolboxGF not found')
+    print('Please ToolboxGF in to PYTHONPATH by typing:')
+    #print('export PYTHONPATH = $PYTHONPATH; C:\pathToDirectory\pyroflueplots\src')
+    print("$ set PYTHONPATH=%PYTHONPATH%;C:\pathToDirectory\pyroflueplots\src")
+    quit()
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
@@ -156,6 +162,13 @@ yaxisNames_7 = ['Char yield (%mass of feedstock, dry ash free)',  'Char H yield 
                'Condensate yield (% mass of feedstock, dry ash free', 'Condensate H yield (%mass of feedstock H, dry ash free,\n adjusted from gas composition)', 
                'Gas yield (% mass of feedstock, dry ash free, by difference)', 'Gas H yield (%mass of feedstock H, dry ash free,\n by gas composition)']
 
+variables_group = [1,1,1,1,
+                   2,2,2,2,
+                   3,3,3,
+                   4,4,4,4,
+                   5,5,5,5,
+                   6,6,7,7]
+
 ########################################3
 #Primero Escojes las variables a poner en la matriz en yaxisToPlot
 #yaxisToPlot =yaxisToPlot_1+yaxisToPlot_3+yaxisToPlot_5+yaxisToPlot_7
@@ -191,7 +204,8 @@ for ax in axs.ravel():
     columns = df[xaxisToPlot[0]].tolist()
     height = 100*np.array(df[ListaVariables[i]].tolist())
     error  = df[ListaVariablesSDev[i]].tolist()
-    ax = Tbx.plotBarCharts(ax,columns, height,error,bar_labels=columns)
+    ax = Tbx.plotBarCharts(ax,columns, height,error,bar_labels=columns,
+                              group_offset = 1.2, group = variables_group )
     if len(bar_labels_x)>0:
         ax.set_xlabel(xaxisToPlot)
     ax.set_ylabel('%')

@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 # Define color palettes
 custom_palette = ['#8c510a', '#d8b365', '#f6e8c3', '#c7eae5', '#5ab4ac', '#01665e', '#762a83', '#80cdc1', '#35978f', '#bf812d', '#dfc27d', '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
@@ -71,7 +72,7 @@ def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
   #array, without outliers   
 #'tab:green', orange, blue, red, purple, olive, cyan. Alternative colour scheme
 
-def plotBarCharts(ax,columns, height,error,bar_labels):
+def plotBarCharts(ax,columns, height,error,bar_labels, group = [], group_offset=1.0):
     bar_colors = ['#8c510a','#8c510a','#8c510a','#8c510a',
               '#d8b365','#d8b365','#d8b365','#d8b365',
               '#f6e8c3','#f6e8c3','#f6e8c3',
@@ -94,17 +95,26 @@ def plotBarCharts(ax,columns, height,error,bar_labels):
                     0.4,0.6,0.8,1,
                     0.4,0.6,0.8,1,
                     0.6,1,
-                    0.6,1]        
+                    0.6,1]
+    offset_i = 0.0
+    xi = 1.0*np.array(range(0,len(columns)))
     for i in range(0,len(columns)):
     #idx[i] = 2*i
+        # For plotting offset between the groups
+        if (len(group) > 0  and i>0):
+            if group[i]!=group[i-1]:
+                offset_i = group_offset
+            else:
+                offset_i = 0.0
+        xi[i:len(xi)] = xi[i:len(xi)] +  offset_i
         if len(bar_labels) > 0: 
-            ax.bar(i,height[i] , label=bar_labels[i],width=0.8, color=bar_colors[i], alpha = alfa_array[i],align='edge')
+            ax.bar(xi[i],height[i] , label=bar_labels[i],width=0.8, color=bar_colors[i], alpha = alfa_array[i],align='edge')
         else:
-            ax.bar(i,height[i] ,width=0.8, color=bar_colors[i], alpha = alfa_array[i],align='edge')
-        if len(error) > 0: ax.errorbar(i+0.4,height[i], yerr=100*error[i], fmt="", color="k")
+            ax.bar(xi[i],height[i] ,width=0.8, color=bar_colors[i], alpha = alfa_array[i],align='edge')
+        if len(error) > 0: ax.errorbar(xi[i]+0.4,height[i], yerr=100*error[i], fmt="", color="k")    
         if len(bar_labels) > 0:
-             ax.set_xticks(range(0,len(columns)))
-             ax.set_xticklabels(bar_labels, rotation = 45,fontsize=8)
+            ax.set_xticks(xi)
+            ax.set_xticklabels(bar_labels, rotation = 45,fontsize=8)
 
 #when making matrix bars with %, multiply the error by 100: yerr=100*error[i]
     return(ax)

@@ -129,6 +129,12 @@ xaxisToPlot = ['Feedstock_ID']
 
 
 
+variables_group = [1,1,1,1,
+                   2,2,2,2,
+                   3,3,3,
+                   4,4,4,4,
+                   5,5,5,5,
+                   6,6,7,7]
 
 ########################################3
 # Primero graficamos las variables que tienen STDEV
@@ -154,7 +160,8 @@ for i in range(len(ListaVariables)):
     height = df[ListaVariables[i]].tolist()
     error  = df[ListaVariablesSDev[i]].tolist()
     bar_labels = df[xaxisToPlot[0]].tolist()
-    ax = Tbx.plotBarCharts(ax,columns, height,error,bar_labels)
+    ax = Tbx.plotBarCharts(ax,columns, height,error,bar_labels,
+                           group_offset = 1.2, group = variables_group)
     ax.set_xlabel(xaxisToPlot)
     ax.set_ylabel(ListaVariables[i])
     ax.set_title(ListaVariables[i])
