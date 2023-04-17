@@ -72,7 +72,7 @@ def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
   #array, without outliers   
 #'tab:green', orange, blue, red, purple, olive, cyan. Alternative colour scheme
 
-def plotBarCharts(ax,columns, height,error,bar_labels, group = [], group_offset=1.0):
+def plotBarCharts(ax,columns, height,error,bar_labels, group = [], group_offset=1.0, user_width = 1.0):
     bar_colors = ['#8c510a','#8c510a','#8c510a','#8c510a',
               '#d8b365','#d8b365','#d8b365','#d8b365',
               '#f6e8c3','#f6e8c3','#f6e8c3',
@@ -108,10 +108,10 @@ def plotBarCharts(ax,columns, height,error,bar_labels, group = [], group_offset=
                 offset_i = 0.0
         xi[i:len(xi)] = xi[i:len(xi)] +  offset_i
         if len(bar_labels) > 0: 
-            ax.bar(xi[i],height[i] , label=bar_labels[i],width=0.8, color=bar_colors[i], alpha = alfa_array[i],align='edge')
+            ax.bar(xi[i],height[i] , label=bar_labels[i],width=user_width, color=bar_colors[i], alpha = alfa_array[i],align='edge')
         else:
-            ax.bar(xi[i],height[i] ,width=0.8, color=bar_colors[i], alpha = alfa_array[i],align='edge')
-        if len(error) > 0: ax.errorbar(xi[i]+0.4,height[i], yerr=100*error[i], fmt="", color="k")    
+            ax.bar(xi[i],height[i] ,width=user_width, color=bar_colors[i], alpha = alfa_array[i],align='edge')
+        if len(error) > 0: ax.errorbar(xi[i]+user_width/2,height[i], yerr=100*error[i], fmt="", color="k")    
         if len(bar_labels) > 0:
             ax.set_xticks(xi)
             ax.set_xticklabels(bar_labels, rotation = 45,fontsize=8)
