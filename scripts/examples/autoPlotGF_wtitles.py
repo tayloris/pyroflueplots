@@ -11,11 +11,33 @@ import matplotlib.colors as pltc
 all_colors = [k for k,v in pltc.cnames.items()]
 
 
-df = pd.read_csv('raw_data_withoutDIV_0_with_outliers.csv', header=1, nrows=24)
+# User input directories
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
+DATAFILE     = os.path.join(parent_dir,'data', 'raw_data_withoutDIV_0_with_outliers.csv')
+OUPUTPLOT    = os.path.join(parent_dir,'plots', 'Figures_Em_con_adjusted_titles')
+# =============================================================
+
+df = pd.read_csv(DATAFILE, header=1, nrows=24)
 
 #print(df)
 #print(df.columns.tolist())
- 
+
+# I add here two examples on how you can check if a key is inside the data frame
+# Example of a variable that is not in the data frame
+Key_test = 'Em_con_H2O%'
+if Key_test in df.columns.tolist():
+    print(Key_test + "FOUND")
+else:
+    print(Key_test + "NOT FOUND")
+
+# Example of a variable that it side the data frame
+Key_test = 'Em_con_CO2_%'
+if Key_test in df.columns.tolist():
+    print(Key_test + "FOUND")
+else:
+    print(Key_test + "NOT FOUND")
+
 
 yaxisToPlot = ['Em_con_CO2_%', 'Em_con_CO2_%_stdev', 'Em_con_CO_mg_Nm-3', 'Em_con_CO_mg_Nm-3_stdev',
                'Em_con_CH4_mgC_Nm-3', 'Em_con_CH4_mgC_Nm-3_stdev', 'Em_con_NMVOC_mgC_Nm-3', 'Em_con_NMVOC_mgC_Nm-3_stdev',
@@ -175,7 +197,14 @@ for j in range(len(xaxisToPlot_1)):
         # file_name=os.path.join(output_folder,titulo)
         # fig.savefig(file_name)
         titulo = ListaVariables[i]+'_'+xaxisToPlot_1[j]+extensionPNG
-        file_name=os.path.join(output_folder,titulo)
+        if os.path.exists(OUPUTPLOT):
+            print(f"Saving plots in directory {OUPUTPLOT}.")
+        else:
+            print(f"The directory {OUPUTPLOT} does not exist.")
+            os.makedirs(OUPUTPLOT)
+            print(f"Directory {OUPUTPLOT} created.")
+            print(f"Saving plots in directory {OUPUTPLOT}.")
+        file_name=os.path.join(OUPUTPLOT,titulo)
         fig.savefig(file_name)
 
 # fig, ax =  plt.subplots()
