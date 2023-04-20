@@ -178,7 +178,7 @@ categoriesSetpoint = df['Setpoint SPJ temp'].unique()
 colorTemp=['black','black','black', 'black','black']
 colorDict2 = Tbx.TwoListToDict(categoriesSetpoint,colorTemp)
 
-output_folder = 'Figures_Em_con_adjusted_titles'
+#output_folder = 'Figures_Em_con_adjusted_titles'
 extension = '.pdf'
 extensionPNG = '.png'
 iter = 0
@@ -208,7 +208,8 @@ for j in range(len(xaxisToPlot_1)):
             print(f"Saving plots in directory {OUPUTPLOT}.")
         file_name=os.path.join(OUPUTPLOT,titulo)
         fig.savefig(file_name)
-        iter += 1 
+        iter += 1
+        plt.close('all')
 # fig, ax =  plt.subplots()
 # ax = Tbx.plotFlueGasStatter(ax,df, xKey=xaxisToPlot[0],
 #                                    yKey=ListaVariables[0],

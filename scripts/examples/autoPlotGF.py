@@ -181,7 +181,7 @@ for j in range(len(xaxisToPlot_1)):
 
         file_name=os.path.join(OUPUTPLOT,titulo)
         fig.savefig(file_name)
-
+        plt.close('all')
 # fig, ax =  plt.subplots()
 # ax = Tbx.plotFlueGasStatter(ax,df, xKey=xaxisToPlot[0],
 #                                    yKey=ListaVariables[0],

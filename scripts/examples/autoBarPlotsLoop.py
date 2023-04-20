@@ -175,6 +175,7 @@ for i in range(len(ListaVariables)):
 
     file_name=os.path.join(OUPUTPLOT,titulo)
     fig.savefig(file_name)
+    plt.close('all')
 
 #########################################################################
 ########################################################################
