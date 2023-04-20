@@ -4,7 +4,16 @@ import numpy as np
 # Define color palettes
 custom_palette = ['#8c510a', '#d8b365', '#f6e8c3', '#c7eae5', '#5ab4ac', '#01665e', '#762a83', '#80cdc1', '#35978f', '#bf812d', '#dfc27d', '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
 setpoint_symbol_palette = ['o', 's', 'D', 'p', '^', '<', '>', '*', 'v', 'h']
-
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 def TwoListToDict(categories,colorSelection):
     colorDict = {}
@@ -19,8 +28,21 @@ def TwoListToDict(categories,colorSelection):
 def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
     categoriesSetpoint = df['Setpoint SPJ temp'].unique()    
     setpoint_symbol_dict = dict(zip(categoriesSetpoint, setpoint_symbol_palette))
-
+    salir =  False
     # ErrorBars
+    #print('ErrorBars')
+    if ( xKey not in df.columns.tolist() ):
+        salir =  True
+        print(bcolors.WARNING + xKey + "Is not a xKey in DataFrame"+ bcolors.ENDC)
+    if ( yKey not in df.columns.tolist() ):
+        salir =  True
+        print( bcolors.WARNING + yKey + "Is not a yKey in DataFrame" + bcolors.ENDC)
+
+    if salir:
+        print(bcolors.FAIL + "No plotting for " + xKey + " with " + yKey + bcolors.ENDC)
+        return ax
+
+
     ax.errorbar(df[xKey],
              df[yKey],
              yerr=df[yErrKey],
