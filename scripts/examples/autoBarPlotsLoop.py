@@ -164,7 +164,7 @@ for i in range(len(ListaVariables)):
                            group_offset = 1.2, group = variables_group)
     ax.set_xlabel(xaxisToPlot)
     ax.set_ylabel(ListaVariables[i])
-    ax.set_title(ListaVariables[i])
+   # ax.set_title(ListaVariables[i])
     titulo = ListaVariables[i]+'_'+xaxisToPlot[0]+extensionPNG
 
     if not os.path.exists(OUPUTPLOT):

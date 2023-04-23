@@ -4,6 +4,13 @@ import numpy as np
 # Define color palettes
 custom_palette = ['#8c510a', '#d8b365', '#f6e8c3', '#c7eae5', '#5ab4ac', '#01665e', '#762a83', '#80cdc1', '#35978f', '#bf812d', '#dfc27d', '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
 setpoint_symbol_palette = ['o', 's', 'D', 'p', '^', '<', '>', '*', 'v', 'h']
+alfa_array0  =  [0.4,0.6,0.8,1,
+                     0.4,0.6,0.8,1,
+                     0.4,0.6,1,
+                     0.4,0.6,0.8,1,
+                     0.4,0.6,0.8,1,
+                     0.6,1,
+                     0.6,1]
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -25,7 +32,8 @@ def TwoListToDict(categories,colorSelection):
     return colorDict
 
 
-def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
+def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2,
+                       x_scaling = 1.0):
     categoriesSetpoint = df['Setpoint SPJ temp'].unique()    
     setpoint_symbol_dict = dict(zip(categoriesSetpoint, setpoint_symbol_palette))
     salir =  False
@@ -43,7 +51,7 @@ def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
         return ax
 
 
-    ax.errorbar(df[xKey],
+    ax.errorbar(x_scaling*df[xKey],
              df[yKey],
              yerr=df[yErrKey],
              fmt='',linestyle='',color='black')
@@ -53,7 +61,7 @@ def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
                             markeredgewidth=2)
     grouped = df.groupby('Setpoint SPJ temp')
     for key, group in grouped:
-        ax.plot(group[xKey], group[yKey],  
+        ax.plot(x_scaling*group[xKey], group[yKey],
         #s = 200+0*group['Em_con_NOx_mgNO2_Nm-3'],
         label=key, marker=setpoint_symbol_dict[key], linestyle='', markerfacecolor='white', markeredgecolor=cDict2[key], markersize=8)    
 
@@ -63,14 +71,14 @@ def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
                             markeredgecolor='None')
     grouped = df.groupby('A_Feedstock_name')
     for key, group in grouped:
-        ax.plot(group[xKey], group[yKey],
+        ax.plot(x_scaling*group[xKey], group[yKey],
         label=key, markerfacecolor=cDict1[key],**filled_marker_style)          
 
     #ax.set_xlim([700,1000])
     #ax.set_ylim([0,600])
     ax.set_xlabel(xKey)
     ax.set_ylabel(yKey)
-    ax.set_title(yKey)
+   # ax.set_title(yKey)
     ax.grid()
 
     # Fixing Legend
@@ -94,7 +102,8 @@ def plotFlueGasStatter(ax,df, xKey,yKey,yErrKey,cDict1,cDict2):
   #array, without outliers   
 #'tab:green', orange, blue, red, purple, olive, cyan. Alternative colour scheme
 
-def plotBarCharts(ax,columns, height,error,bar_labels, group = [], group_offset=1.0, user_width = 1.0):
+def plotBarCharts(ax,columns, height,error,bar_labels, group = [], group_offset=1.0, user_width = 1.0,
+                  alfa_array =alfa_array0):
     bar_colors = ['#8c510a','#8c510a','#8c510a','#8c510a',
               '#d8b365','#d8b365','#d8b365','#d8b365',
               '#f6e8c3','#f6e8c3','#f6e8c3',
@@ -103,21 +112,15 @@ def plotBarCharts(ax,columns, height,error,bar_labels, group = [], group_offset=
               '#01665e','#01665e',
               '#762a83','#762a83',]
 
-           
-#    alfa_array  =  [0.6,0.8,1,
- #                   0.4,0.6,0.8,1,
-  #                  0.4,0.6,1,
-   #                 0.4,0.6,0.8,1,
+    #without outliers:
+    # alfa_array  =  [0.6,0.8,1,
     #                0.4,0.6,0.8,1,
-     #               0.6,
-      #              0.6]
-    alfa_array  =  [0.4,0.6,0.8,1,
-                    0.4,0.6,0.8,1,
-                    0.4,0.6,1,
-                    0.4,0.6,0.8,1,
-                    0.4,0.6,0.8,1,
-                    0.6,1,
-                    0.6,1]
+    #                0.4,0.6,1,
+    #                0.4,0.6,0.8,1,
+    #                0.4,0.6,0.8,1,
+    #                0.6,
+    #                0.6,1]
+    # with outliers:
     offset_i = 0.0
     xi = 1.0*np.array(range(0,len(columns)))
     for i in range(0,len(columns)):
