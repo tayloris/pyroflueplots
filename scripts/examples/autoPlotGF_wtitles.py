@@ -54,7 +54,7 @@ yaxisToPlot = ['Em_con_CO2_%', 'Em_con_CO2_%_stdev', 'Em_con_CO_mg_Nm-3', 'Em_co
                'Em_con_NH3_mg_Nm-3_normalized', 'Em_con_NH3_mg_Nm-3_stdev_normalized', 'Em_con_HCN_mg_Nm-3_normalized', 'Em_con_HCN_mg_Nm-3_stdev_normalized',
                'Em_con_HCl_mg_Nm-3_normalized', 'Em_con_HCl_mg_Nm-3_stdev_normalized', 'Em_con_NOx_mgNO2_Nm-3_normalized', 'Em_con_NOx_mgNO2_Nm-3_stdev_normalized',
                'Em_con_H2O_%_normalized', 'Em_con_H2O_%_stdev_normalized', 'Em_con_CO2_%_normalized', 'Em_con_CO2_%_stdev_normalized',
-               'NOx_readjusted_per_11%O2_mgNO2_Nm-3', 'NOx_readjusted_per_11%O2_mgNO2_Nm-3_stdev', ]
+               'NOx_readjusted_per_11%O2_mgNO2_Nm-3', 'NOx_readjusted_per_11%O2_mgNO2_Nm-3_stdev']
 
 yaxisToPlot_1 = ['Em_con_CO2_%', 'Em_con_CO2_%_stdev', 'Em_con_CO_mg_Nm-3', 'Em_con_CO_mg_Nm-3_stdev',
                'Em_con_CH4_mgC_Nm-3', 'Em_con_CH4_mgC_Nm-3_stdev', 'Em_con_NMVOC_mgC_Nm-3', 'Em_con_NMVOC_mgC_Nm-3_stdev',
@@ -149,15 +149,19 @@ xaxisToPlot = ['T° burner', 'Feed_N%_readj_for_pyro_water','Gas_flow_kg_h', 'Fe
                'Est_excess_air_flow_Nm3_h-1', 'Est_excess_air_flow_kmol_h-1', 'Propane_C_load_kg_h-1_by_diff', 'Gas_C_load_kg_h-1_by_diff', 
                'Feed_wet_flow_kg_h', 'Feed_dry_flow_kg_h', 'Est_prop_flow_kmol_h-1', 'Flue_gas_comb_incl_prop_excess_air_mass_flow_kg_h-1', 'Flue_gas_comb_incl_prop_excess_air_vol_flow_Nm3_h-1',
                'Theo_flue_gas_comp_stoic_air_no_prop_mass_flow_kg_h-1', 'Theo_flue_gas_comp_stoic_air_no_prop_gas_flow_Nm3_h-1',
-               'Est_prop_mass_flow_kg_h-1', 'Est_prop_flow_Nm3_h-1', ]
+               'Est_prop_mass_flow_kg_h-1', 'Est_prop_flow_Nm3_h-1' ]
 
-xaxisToPlot_1 = ['Est_prop_flow_Nm3_h-1_by_gas_comp', 'Feed_wet_flow_kg_h', 'Feed_dry_flow_kg_h', 'Feed_N%_readj_for_pyro_water', 'Flue_gas_vol_Nm3_h-1_by_emfacgascomp', 'Flue_gas_vol_Nm3_h-1_by_emfacgascomp_normalized', 'Flue_gas_vol_Nm3_h-1_by_emfacgascomp_normalized_by_fuel_addition', 'Est_prop_flow_kmol_h-1_by_gas_comp', 'Flue_gas_comb_incl_prop_excess_air_O2%mol_by_gas_comp', 'Gas_flow_kg_h', 
-               'Theo_flue_gas_comp_stoic_air_no_prop_gas_flow_Nm3_h-1_by_gas_comp', 'Flue_gas_comb_incl_prop_excess_air_mass_flow_kg_h-1_by_gas_comp', 'Flue_gas_comb_incl_prop_excess_air_vol_flow_Nm3_h-1_by_gas_comp', 'Flue_gas_comb_incl_prop_excess_air_vol_flow_Nm3_h-1_by_gas_comp_normalized', 'Theo_flue_gas_comp_stoic_air_no_prop_mass_flow_kg_h-1_by_gas_comp', 'Feed_N_load_kg_h-1', 'Gas_N_load_kg_h-1_by_diff', 'Est_excess_air_flow_kg_h-1_by_gas_comp',
-               'Est_excess_air_flow_Nm3_h-1_by_gas_comp', 'Est_excess_air_flow_kmol_h-1_by_gas_comp', 'Propane_C_load_kg_h-1_by_gas_comp', 'Gas_C_load_kg_h-1_by_gas_comp', 'T° burner', 'Est_prop_mass_flow_kg_h-1_by_gas_comp', ]
 
-xaxisTitles_1 = ['Estimated propane use (Nm\u00B3/h)', 'Feedstock flow (kg/h)', 'Feedstock dry flow (kg/h)', 'Feedstock N-concentration (% N in feedstock)', 'Estimated flue gas flow assuming neglible propane (Nm\u00B3/h)', 'Estimated flue gas flow, normalized without propane (Nm\u00B3/h)', 'Estimated flue gas flow, accounting for propane (Nm\u00B3/h)', 'Estimated propane use (kmol/h)', 'Estimated flue gas O\u2082 (%vol)', 'Produced pyrolysis gas (kg/h)', 
-               'Theoretical flue gas flow without propane (Nm\u00B3/h)', 'Estimated flue gas flow (kg/h)', 'Estimated flue gas flow (Nm\u00B3/h)', 'Estimated flue gas flow, normalized (Nm\u00B3/h)', 'Theoretical flue gas flow without propane (kg/h)', 'Total N loaded from feedstock (kg N/h)', 'Total N in pyrolysis gas, by difference (kg N/h)', 'Estimated excess air flow (kg/h)',
-               'Estimated excess air flow (Nm\u00B3/h)', 'Estimated excess air flow (kmol/h)', 'Estimated propane C load (kg C/h)', 'Pyrolysis gas C load (kg C/h)', 'Average temperature burner (°C)', 'Estimated propane use (kg/h)', ]
+
+xaxisToPlot_1 = ['Flue_gas_comb_incl_prop_excess_air_O2%mol_by_gas_comp_dry', 'Est_prop_flow_Nm3_h-1_by_gas_comp', 'Feed_N_load_kg_h-1', 'Gas_N_load_kg_h-1_by_diff', 'T° burner',  'Feed_wet_flow_kg_h', 'Feed_dry_flow_kg_h', 'Flue_gas_vol_Nm3_h-1_by_emfacgascomp', 'Flue_gas_vol_Nm3_h-1_by_emfacgascomp_normalized', 'Flue_gas_vol_Nm3_h-1_by_emfacgascomp_normalized_by_fuel_addition', 'Est_prop_flow_kmol_h-1_by_gas_comp', 'Gas_flow_kg_h', 
+                'Flue_gas_comb_incl_prop_excess_air_mass_flow_kg_h-1_by_gas_comp', 'Flue_gas_comb_incl_prop_excess_air_vol_flow_Nm3_h-1_by_gas_comp', 'Flue_gas_comb_incl_prop_excess_air_vol_flow_Nm3_h-1_by_gas_comp_normalized', 'Theo_flue_gas_comp_stoic_air_no_prop_mass_flow_kg_h-1_by_gas_comp', 'Feed_S_load_g_h-1', 'Gas_S_load_g_h-1','Est_excess_air_flow_kg_h-1_by_gas_comp',
+               'Est_excess_air_flow_Nm3_h-1_by_gas_comp', 'Propane_C_load_kg_h-1_by_gas_comp', 'Gas_C_load_kg_h-1_by_gas_comp', 'Est_prop_mass_flow_kg_h-1_by_gas_comp']
+
+
+
+xaxisTitles_1 = ['Estimated flue gas O\u2082 (%vol, dry gas)', 'Estimated propane use (Nm\u00B3/h)', 'Total N loaded from feedstock (kg N/h)', 'Total N in pyrolysis gas, by difference (kg N/h)', 'Average temperature burner (°C)', 'Feedstock flow (kg/h)', 'Feedstock dry flow (kg/h)',  'Estimated flue gas flow assuming neglible propane (Nm\u00B3/h)', 'Estimated flue gas flow, normalized without propane (Nm\u00B3/h)', 'Estimated flue gas flow, accounting for propane (Nm\u00B3/h)', 'Estimated propane use (kmol/h)', 'Produced pyrolysis gas (kg/h)', 
+                'Estimated flue gas flow (kg/h)', 'Estimated flue gas flow (Nm\u00B3/h)', 'Estimated flue gas flow, normalized (Nm\u00B3/h)', 'Theoretical flue gas flow without propane (kg/h)', 'Total S loaded from feedstock (kg N/h)', 'Total S in pyrolysis gas, by difference (kg N/h)', 'Estimated excess air flow (kg/h)',
+               'Estimated excess air flow (Nm\u00B3/h)',  'Estimated propane C load (kg C/h)', 'Pyrolysis gas C load (kg C/h)', 'Estimated propane use (kg/h)', ]
 
 ListaVariables=[]
 ListaVariablesSDev=[]
@@ -173,7 +177,8 @@ categories = df['A_Feedstock_name'].unique()
 colorSelection=['#8c510a', '#d8b365', '#f6e8c3', '#c7eae5', '#5ab4ac', '#01665e', '#762a83', '#80cdc1', '#35978f', '#bf812d', '#dfc27d', '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
 colorDict = Tbx.TwoListToDict(categories,colorSelection)
 
-ListaLinea = ['Em_con_NOx_mgNO2_Nm-3','NOx_readjusted_per_11%O2_mgNO2_Nm-3_by_gas_comp']
+#ListaLinea = ['Em_con_NOx_mgNO2_Nm-3','NOx_readjusted_per_11%O2_mgNO2_Nm-3_by_gas_comp']
+ListaLinea = []
 categoriesSetpoint = df['Setpoint SPJ temp'].unique()
 colorTemp=['black','black','black', 'black','black']
 colorDict2 = Tbx.TwoListToDict(categoriesSetpoint,colorTemp)
@@ -183,6 +188,11 @@ extension = '.pdf'
 extensionPNG = '.png'
 iter = 0
 for j in range(len(xaxisToPlot_1)):
+    if j < 1:
+        x_scala= 100.0
+    else:
+        x_scala = 1.0
+
     for i in range(len(ListaVariables)):
         print('plotting:', xaxisToPlot_1[j],',   ',ListaVariables[i],',  og,',ListaVariablesSDev[i])
         fig, ax =  plt.subplots()
@@ -191,7 +201,8 @@ for j in range(len(xaxisToPlot_1)):
                                         yKey=ListaVariables[i],
                                         yErrKey=ListaVariablesSDev[i],
                                         cDict1=colorDict,
-                                        cDict2=colorDict2)
+                                        cDict2=colorDict2,
+                                        x_scaling = x_scala)
         ax.set_xlabel(xaxisTitles_1[j])
         ax.set_ylabel(yaxisTitles_1[i])
         # titulo = ListaVariables[i]+extension
