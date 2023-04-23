@@ -1,9 +1,11 @@
 # To activate Python enviroment $  C:\PythonEnv\pythonEnv\Scripts\activate.bat
 
+
 import pandas as pd
 import os
 import sys
 # adding source folder to the system path
+#sys.path.insert(0, '/home/manuel/repos/pyroflueplots/src/')
 try:
     import ToolboxGF as Tbx
 except:
@@ -11,7 +13,7 @@ except:
     print('Please ToolboxGF in to PYTHONPATH by typing:')
     #print('export PYTHONPATH = $PYTHONPATH; C:\pathToDirectory\pyroflueplots\src')
     print("$ set PYTHONPATH=%PYTHONPATH%;C:\pathToDirectory\pyroflueplots\src")
-    quit()
+    quit() 
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
@@ -20,15 +22,14 @@ import numpy as np
 all_colors = [k for k,v in pltc.cnames.items()]
 
 
+
+# User input directories
 script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
 extensionPDF = '.pdf'
 extensionPNG = '.png'
-
-# User input directories
-
-DATAFILE      = os.path.join(parent_dir,'data', 'raw_data_withoutDIV_0_with_outliers.csv')
-OUPUTPLOT     = os.path.join(parent_dir,'plots', 'BarCharsMatrix_MassBalance')
+DATAFILE     = os.path.join(parent_dir,'data', 'raw_data_withoutDIV_0_with_outliers.csv')
+OUPUTPLOT    = os.path.join(parent_dir,'plots', 'BarCharsMatrix_MassBalance')
 
 # =============================================================
 
@@ -37,7 +38,7 @@ df = pd.read_csv(DATAFILE, header=1, nrows=23)
 #print(df)
  
 # Tuve que separar la liste de variables porque hay grupos que no tienen "stdev"
-yaxisToPlot_1 = ['Char_yield%',  'Remove_stdev', 'Char_HHV%yield', 'Char_HHV%yield_stdev',
+yyaxisToPlot_1 = ['Char_yield%',  'Remove_stdev', 'Char_HHV%yield', 'Char_HHV%yield_stdev',
                'Condensate_yield%', 'Remove_stdev', 'Condensate_HHV%yield', 'Condensate_HHV%yield_stdev',
                'Gas_yield%', 'Remove_stdev', 'Gas_HHV%yield_by_diff', 'Gas_HHV%yield_by_diff_stdev',
                'Char_yield%_ashfreedry', 'Char_yield%_ashfreedry_stdev', 'Char_HHV%dry_ashfree_yield', 'Char_HHV%dry_ashfree_yield_stdev',
@@ -77,52 +78,6 @@ yaxisToPlot_8 = ['Em_fac_CO2_g_kg-1char',  'Em_fac_CO2_g_kg-1char_stdev', 'Em_fa
                'Em_fac_NH3_g_kg-1char', 'Em_fac_NH3_g_kg-1char_stdev', 'Em_fac_HCN_g_kg-1char', 'Em_fac_HCN_g_kg-1char_stdev',
                'Em_fac_HCl_g_kg-1char', 'Em_fac_HCl_g_kg-1char_stdev', 'Em_fac_NOx_gNO2_kg-1char', 'Em_fac_NOx_gNO2_kg-1char_stdev']
 
-yaxisToPlot_2 = ['Em_fac_Naphtalene_particle_µg_kg-1char', 'Em_fac_Naphtalene_gas_µg_kg-1char', 'Em_fac_Naphtalene_tot_µg_kg-1char', 'Em_fac_Acenaphthylene_particle_µg_kg-1char',
-               'Em_fac_Acenaphthylene_gas_µg_kg-1char', 'Em_fac_Acenaphthylene_tot_µg_kg-1char', 'Em_fac_Acenaphthene_particle_µg_kg-1char', 'Em_fac_Acenaphthene_gas_µg_kg-1char',
-               'Em_fac_Acenaphthene_tot_µg_kg-1char', 'Em_fac_Fluorene_particle_µg_kg-1char', 'Em_fac_Fluorene_Gas_µg_kg-1char', 'Em_fac_Fluorene_Tot_µg_kg-1char',
-               'Em_fac_Phenanthrene_particle_µg_kg-1char', 'Em_fac_Phenanthrene_gas_µg_kg-1char', 'Em_fac_Phenanthrene_tot_µg_kg-1char', 'Em_fac_Anthracene_particle_µg_kg-1char',
-               'Em_fac_Anthracene_gas_µg_kg-1char', 'Em_fac_Anthracene_tot_µg_kg-1char', 'Em_fac_Fluoranthene_particle_µg_kg-1char', 'Em_fac_Fluoranthene_gas_µg_kg-1char',
-               'Em_fac_Fluoranthene_tot_µg_kg-1char', 'Em_fac_Pyrene_particle_µg_kg-1char', 'Em_fac_Pyrene_gas_µg_kg-1char', 'Em_fac_Pyrene_tot_µg_kg-1char',
-               'Em_fac_Benz(a)anthracene_particle_µg_kg-1char', 'Em_fac_Benz(a)anthracene_gas_µg_kg-1char', 'Em_fac_Benz(a)anthracene_tot_µg_kg-1char',
-               'Em_fac_Chrysene_particle_µg_kg-1char', 'Em_fac_Chrysene_gas_µg_kg-1char', 'Em_fac_Chrysene_tot_µg_kg-1char', 'Em_fac_Benzo(b)fluoranthene_particle_µg_kg-1char',
-               'Em_fac_Benzo(b)fluoranthene_gas_µg_kg-1char', 'Em_fac_Benzo(b)fluoranthene_tot_µg_kg-1char', 'Em_fac_Benzo(k)fluoranthene_particle_µg_kg-1char',
-               'Em_fac_Benzo(k)fluoranthene_gas_µg_kg-1char', 'Em_fac_Benzo(k)fluoranthene_tot_µg_kg-1char', 'Em_fac_Benzo(a)pyrene_particle_µg_kg-1char',
-               'Em_fac_Benzo(a)pyrene_gas_µg_kg-1char', 'Em_fac_Benzo(a)pyrene_tot_µg_kg-1char', 'Em_fac_Indeno(1,2,3-cd)pyrene_particle_µg_kg-1char',
-               'Em_fac_Indeno(1,2,3-cd)pyrene_gas_µg_kg-1char', 'Em_fac_Indeno(1,2,3-cd)pyrene_tot_µg_kg-1char', 'Em_fac_Benzo(ghi)perylene_particle_µg_kg-1char',
-               'Em_fac_Benzo(ghi)perylene_gas_µg_kg-1char', 'Em_fac_Benzo(ghi)perylene_tot_µg_kg-1char', 'Em_fac_Dibenz(ah)anthracene_particle_µg_kg-1char',
-               'Em_fac_Dibenz(ah)anthracene_gas_µg_kg-1char', 'Em_fac_Dibenz(ah)anthracene_tot_µg_kg-1char', 'Em_fac_ΣPAH-16_particle_µg_kg-1char',
-               'Em_fac_ΣPAH-16_gas_µg_kg-1char', 'Em_fac_ΣPAH-16_tot_µg_kg-1char']
-
-yaxisToPlot_3 = ['Em_fac_CO2_g_kg-1feedstock', 'Em_fac_CO2_g_kg-1feedstock_stdev',
-               'Em_fac_CO_g_kg-1feedstock', 'Em_fac_CO_g_kg-1feedstock_stdev', 'Em_fac_CH4_g_kg-1feedstock', 'Em_fac_CH4_g_kg-1feedstock_stdev',
-               'Em_fac_NMVOC_g_kg-1feedstock', 'Em_fac_NMVOC_g_kg-1feedstock_stdev', 'Em_fac_TSP_g_kg-1feedstock', 'Em_fac_TSP_g_kg-1feedstock_stdev',
-               'Em_fac_PIC_g_kg-1feedstock', 'Em_fac_PIC_g_kg-1feedstock_stdev', 'Em_fac_SO2_g_kg-1feedstock', 'Em_fac_SO2_g_kg-1feedstock_stdev',
-               'Em_fac_NO_g_kg-1feedstock', 'Em_fac_NO_g_kg-1feedstock_stdev', 'Em_fac_NO2_g_kg-1feedstock', 'Em_fac_NO2_g_kg-1feedstock_stdev',
-               'Em_fac_N2O_g_kg-1feedstock', 'Em_fac_N2O_g_kg-1feedstock_stdev', 'Em_fac_NH3_g_kg-1feedstock', 'Em_fac_NH3_g_kg-1feedstock_stdev',
-               'Em_fac_HCN_g_kg-1feedstock', 'Em_fac_HCN_g_kg-1feedstock_stdev', 'Em_fac_HCl_g_kg-1feedstock', 'Em_fac_HCl_g_kg-1feedstock_stdev', 
-               'Em_fac_NOx_gNO2_kg-1feedstock', 'Em_fac_NOx_gNO2_kg-1feedstock_stdev']
-
-yaxisToPlot_4 = [ 'Em_fac_Naphtalene_particle_µg_kg-1feedstock', 'Em_fac_Naphtalene_gas_µg_kg-1feedstock',
-               'Em_fac_Naphtalene_tot_µg_kg-1feedstock', 'Em_fac_Acenaphthylene_particle_µg_kg-1feedstock', 'Em_fac_Acenaphthylene_gas_µg_kg-1feedstock',
-               'Em_fac_Acenaphthylene_tot_µg_kg-1feedstock', 'Em_fac_Acenaphthene_particle_µg_kg-1feedstock', 'Em_fac_Acenaphthene_gas_µg_kg-1feedstock', 
-               'Em_fac_Acenaphthene_tot_µg_kg-1feedstock', 'Em_fac_Fluorene_particle_µg_kg-1feedstock', 'Em_fac_Fluorene_Gas_µg_kg-1feedstock',
-               'Em_fac_Fluorene_Tot_µg_kg-1feedstock', 'Em_fac_Phenanthrene_particle_µg_kg-1feedstock', 'Em_fac_Phenanthrene_gas_µg_kg-1feedstock',
-               'Em_fac_Phenanthrene_tot_µg_kg-1feedstock', 'Em_fac_Anthracene_particle_µg_kg-1feedstock', 'Em_fac_Anthracene_gas_µg_kg-1feedstock',
-               'Em_fac_Anthracene_tot_µg_kg-1feedstock', 'Em_fac_Fluoranthene_particle_µg_kg-1feedstock', 'Em_fac_Fluoranthene_gas_µg_kg-1feedstock',
-               'Em_fac_Fluoranthene_tot_µg_kg-1feedstock', 'Em_fac_Pyrene_particle_µg_kg-1feedstock', 'Em_fac_Pyrene_gas_µg_kg-1feedstock',
-               'Em_fac_Pyrene_tot_µg_kg-1feedstock', 'Em_fac_Benz(a)anthracene_particle_µg_kg-1feedstock', 'Em_fac_Benz(a)anthracene_gas_µg_kg-1feedstock',
-               'Em_fac_Benz(a)anthracene_tot_µg_kg-1feedstock', 'Em_fac_Chrysene_particle_µg_kg-1feedstock', 'Em_fac_Chrysene_gas_µg_kg-1feedstock', 'Em_fac_Chrysene_tot_µg_kg-1feedstock', 'Em_fac_Benzo(b)fluoranthene_particle_µg_kg-1feedstock', 'Em_fac_Benzo(b)fluoranthene_gas_µg_kg-1feedstock', 'Em_fac_Benzo(b)fluoranthene_tot_µg_kg-1feedstock', 'Em_fac_Benzo(k)fluoranthene_particle_µg_kg-1feedstock', 'Em_fac_Benzo(k)fluoranthene_gas_µg_kg-1feedstock', 'Em_fac_Benzo(k)fluoranthene_tot_µg_kg-1feedstock', 'Em_fac_Benzo(a)pyrene_particle_µg_kg-1feedstock', 'Em_fac_Benzo(a)pyrene_gas_µg_kg-1feedstock', 'Em_fac_Benzo(a)pyrene_tot_µg_kg-1feedstock', 'Em_fac_Indeno(1,2,3-cd)pyrene_particle_µg_kg-1feedstock', 'Em_fac_Indeno(1,2,3-cd)pyrene_gas_µg_kg-1feedstock', 'Em_fac_Indeno(1,2,3-cd)pyrene_tot_µg_kg-1feedstock', 'Em_fac_Benzo(ghi)perylene_particle_µg_kg-1feedstock', 'Em_fac_Benzo(ghi)perylene_gas_µg_kg-1feedstock', 'Em_fac_Benzo(ghi)perylene_tot_µg_kg-1feedstock', 'Em_fac_Dibenz(ah)anthracene_particle_µg_kg-1feedstock', 'Em_fac_Dibenz(ah)anthracene_gas_µg_kg-1feedstock', 'Em_fac_Dibenz(ah)anthracene_tot_µg_kg-1feedstock', 'Em_fac_ΣPAH-16_particle_µg_kg-1feedstock', 'Em_fac_ΣPAH-16_gas_µg_kg-1feedstock', 'Em_fac_ΣPAH-16_tot_µg_kg-1feedstock', 'Tot_gas_exhaust_m3_kg-1char', 'Tot_gas_exhaust_m3_kg-1feedstock']
-
-yaxisToPlot_5=['Em_fac_CO2_g_kg-1dry_ashfree_char', 'Em_fac_CO2_g_kg-1dry_ashfree_char_stdev', 'Em_fac_CO_g_kg-1dry_ashfree_char', 'Em_fac_CO_g_kg-1dry_ashfree_char_stdev',
-               'Em_fac_CH4_g_kg-1dry_ashfree_char', 'Em_fac_CH4_g_kg-1dry_ashfree_char_stdev', 'Em_fac_NMVOC_g_kg-1dry_ashfree_char', 'Em_fac_NMVOC_g_kg-1dry_ashfree_char_stdev',
-               'Em_fac_TSP_g_kg-1dry_ashfree_char', 'Em_fac_TSP_g_kg-1dry_ashfree_char_stdev', 'Em_fac_PIC_g_kg-1dry_ashfree_char', 'Em_fac_PIC_g_kg-1dry_ashfree_char_stdev',
-               'Em_fac_SO2_g_kg-1dry_ashfree_char', 'Em_fac_SO2_g_kg-1dry_ashfree_char_stdev', 'Em_fac_NO_g_kg-1dry_ashfree_char', 'Em_fac_NO_g_kg-1dry_ashfree_char_stdev',
-               'Em_fac_NO2_g_kg-1dry_ashfree_char', 'Em_fac_NO2_g_kg-1dry_ashfree_char_stdev', 'Em_fac_N2O_g_kg-1dry_ashfree_char', 'Em_fac_N2O_g_kg-1dry_ashfree_char_stdev',
-               'Em_fac_NH3_g_kg-1dry_ashfree_char', 'Em_fac_NH3_g_kg-1dry_ashfree_char_stdev', 'Em_fac_HCN_g_kg-1dry_ashfree_char', 'Em_fac_HCN_g_kg-1dry_ashfree_char_stdev',
-               'Em_fac_HCl_g_kg-1dry_ashfree_char', 'Em_fac_HCl_g_kg-1dry_ashfree_char_stdev', 'Em_fac_NOx_gNO2_kg-1dry_ashfree_char', 'Em_fac_NOx_gNO2_kg-1dry_ashfree_char_stdev']
-
-yaxisToPlot_6=['Em_fac_Naphtalene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Naphtalene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Naphtalene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Acenaphthylene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Acenaphthylene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Acenaphthylene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Acenaphthene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Acenaphthene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Acenaphthene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Fluorene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Fluorene_Gas_µg_kg-1dry_ashfree_char', 'Em_fac_Fluorene_Tot_µg_kg-1dry_ashfree_char', 'Em_fac_Phenanthrene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Phenanthrene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Phenanthrene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Anthracene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Anthracene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Anthracene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Fluoranthene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Fluoranthene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Fluoranthene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Pyrene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Pyrene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Pyrene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Benz(a)anthracene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Benz(a)anthracene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Benz(a)anthracene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Chrysene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Chrysene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Chrysene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(b)fluoranthene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(b)fluoranthene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(b)fluoranthene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(k)fluoranthene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(k)fluoranthene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(k)fluoranthene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(a)pyrene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(a)pyrene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(a)pyrene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Indeno(1,2,3-cd)pyrene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Indeno(1,2,3-cd)pyrene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Indeno(1,2,3-cd)pyrene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(ghi)perylene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(ghi)perylene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Benzo(ghi)perylene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_Dibenz(ah)anthracene_particle_µg_kg-1dry_ashfree_char', 'Em_fac_Dibenz(ah)anthracene_gas_µg_kg-1dry_ashfree_char', 'Em_fac_Dibenz(ah)anthracene_tot_µg_kg-1dry_ashfree_char', 'Em_fac_ΣPAH-16_particle_µg_kg-1dry_ashfree_char', 'Em_fac_ΣPAH-16_gas_µg_kg-1dry_ashfree_char', 
-               'Em_fac_ΣPAH-16_tot_µg_kg-1dry_ashfree_char', 'Em_fac_CO2_g_kg-1dry_ashfree_feedstock', 'Em_fac_CO2_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_CO_g_kg-1dry_ashfree_feedstock', 'Em_fac_CO_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_CH4_g_kg-1dry_ashfree_feedstock', 'Em_fac_CH4_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_NMVOC_g_kg-1dry_ashfree_feedstock', 'Em_fac_NMVOC_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_TSP_g_kg-1dry_ashfree_feedstock', 'Em_fac_TSP_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_PIC_g_kg-1dry_ashfree_feedstock', 'Em_fac_PIC_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_SO2_g_kg-1dry_ashfree_feedstock', 'Em_fac_SO2_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_NO_g_kg-1dry_ashfree_feedstock', 'Em_fac_NO_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_NO2_g_kg-1dry_ashfree_feedstock', 'Em_fac_NO2_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_N2O_g_kg-1dry_ashfree_feedstock', 'Em_fac_N2O_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_NH3_g_kg-1dry_ashfree_feedstock', 'Em_fac_NH3_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_HCN_g_kg-1dry_ashfree_feedstock', 'Em_fac_HCN_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_HCl_g_kg-1dry_ashfree_feedstock', 'Em_fac_HCl_g_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_NOx_gNO2_kg-1dry_ashfree_feedstock', 'Em_fac_NOx_gNO2_kg-1dry_ashfree_feedstock_stdev', 'Em_fac_Naphtalene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Naphtalene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Naphtalene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Acenaphthylene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Acenaphthylene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Acenaphthylene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Acenaphthene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Acenaphthene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Acenaphthene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Fluorene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Fluorene_Gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Fluorene_Tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Phenanthrene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Phenanthrene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Phenanthrene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Anthracene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Anthracene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Anthracene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Fluoranthene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Fluoranthene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Fluoranthene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Pyrene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Pyrene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Pyrene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benz(a)anthracene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benz(a)anthracene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benz(a)anthracene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Chrysene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Chrysene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Chrysene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(b)fluoranthene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(b)fluoranthene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(b)fluoranthene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(k)fluoranthene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(k)fluoranthene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(k)fluoranthene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(a)pyrene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(a)pyrene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(a)pyrene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Indeno(1,2,3-cd)pyrene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Indeno(1,2,3-cd)pyrene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Indeno(1,2,3-cd)pyrene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(ghi)perylene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(ghi)perylene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Benzo(ghi)perylene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Dibenz(ah)anthracene_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Dibenz(ah)anthracene_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_Dibenz(ah)anthracene_tot_µg_kg-1dry_ashfree_feedstock', 'Em_fac_ΣPAH-16_particle_µg_kg-1dry_ashfree_feedstock', 'Em_fac_ΣPAH-16_gas_µg_kg-1dry_ashfree_feedstock', 'Em_fac_ΣPAH-16_tot_µg_kg-1dry_ashfree_feedstock']
 
 yaxisToPlot_7=['Pyrogas_CO_airadj_kg_ton-1dryfeedstock', 'Pyrogas_CO_airadj_kg_ton-1dryfeedstock_stdev', 'Pyrogas_CO2_airadj_kg_ton-1dryfeedstock', 'Pyrogas_CO2_airadj_kg_ton-1dryfeedstock_stdev', 'Pyrogas_CH4_airadj_kg_ton-1dryfeedstock', 'Pyrogas_CH4_airadj_kg_ton-1dryfeedstock_stdev', 'Pyrogas_CnHm_as_C3H5_airadj_kg_ton-1dryfeedstock', 'Pyrogas_CnHm_as_C3H5_airadj_kg_ton-1dryfeedstock_stdev', 'Pyrogas_H2_airadj_kg_ton-1dryfeedstock', 'Pyrogas_H2_airadj_kg_ton-1dryfeedstock_stdev', 'Pyrogas_C2H4_airadj_kg_ton-1dryfeedstock', 'Pyrogas_C2H4_airadj_kg_ton-1dryfeedstock_stdev', 'Pyrogas_N2_airadj_kg_ton-1dryfeedstock', 'Pyrogas_N2_airadj_kg_ton-1dryfeedstock_stdev', 'Pyrogas_LHV_airadj_MJ_ton-1dryfeedstock', 'Pyrogas_LHV_airadj_MJ_ton-1dryfeedstock_stdev', 'Pyrogas_CO_airadj_kg_ton-1dryashfreefeedstock', 'Pyrogas_CO_airadj_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_CO2_airadj_kg_ton-1dryashfreefeedstock', 'Pyrogas_CO2_airadj_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_CH4_airadj_kg_ton-1dryashfreefeedstock', 'Pyrogas_CH4_airadj_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_CnHm_as_C3H5_airadj_kg_ton-1dryashfreefeedstock', 'Pyrogas_CnHm_as_C3H5_airadj_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_H2_airadj_kg_ton-1dryashfreefeedstock', 'Pyrogas_H2_airadj_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_C2H4_airadj_kg_ton-1dryashfreefeedstock', 'Pyrogas_C2H4_airadj_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_N2_airadj_kg_ton-1dryashfreefeedstock', 'Pyrogas_N2_airadj_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_LHV_airadj_MJ_ton-1dryashfreefeedstock', 'Pyrogas_LHV_airadj_MJ_ton-1dryashfreefeedstock_stdev', 'Pyrogas_CO_noO2noN2_kg_ton-1dryfeedstock', 'Pyrogas_CO_noO2noN2_kg_ton-1dryfeedstock_stdev', 'Pyrogas_CO2_noO2noN2_kg_ton-1dryfeedstock', 'Pyrogas_CO2_noO2noN2_kg_ton-1dryfeedstock_stdev', 'Pyrogas_CH4_noO2noN2_kg_ton-1dryfeedstock', 'Pyrogas_CH4_noO2noN2_kg_ton-1dryfeedstock_stdev', 'Pyrogas_CnHm_as_C3H5_noO2noN2_kg_ton-1dryfeedstock', 'Pyrogas_CnHm_as_C3H5_noO2noN2_kg_ton-1dryfeedstock_stdev', 'Pyrogas_H2_noO2noN2_kg_ton-1dryfeedstock', 'Pyrogas_H2_noO2noN2_kg_ton-1dryfeedstock_stdev', 'Pyrogas_C2H4_noO2noN2_kg_ton-1dryfeedstock', 'Pyrogas_C2H4_noO2noN2_kg_ton-1dryfeedstock_stdev', 'Pyrogas_LHV_noO2noN2_MJ_ton-1dryfeedstock', 'Pyrogas_LHV_noO2noN2_MJ_ton-1dryfeedstock_stdev', 'Pyrogas_CO_noO2noN2_kg_ton-1dryashfreefeedstock', 'Pyrogas_CO_noO2noN2_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_CO2_noO2noN2_kg_ton-1dryashfreefeedstock', 'Pyrogas_CO2_noO2noN2_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_CH4_noO2noN2_kg_ton-1dryashfreefeedstock', 'Pyrogas_CH4_noO2noN2_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_CnHm_as_C3H5_noO2noN2_kg_ton-1dryashfreefeedstock', 'Pyrogas_CnHm_as_C3H5_noO2noN2_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_H2_noO2noN2_kg_ton-1dryashfreefeedstock', 'Pyrogas_H2_noO2noN2_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_C2H4_noO2noN2_kg_ton-1dryashfreefeedstock', 'Pyrogas_C2H4_noO2noN2_kg_ton-1dryashfreefeedstock_stdev', 'Pyrogas_LHV_noO2noN2_MJ_ton-1dryashfreefeedstock', 'Pyrogas_LHV_noO2noN2_MJ_ton-1dryashfreefeedstock_stdev']
 
@@ -154,13 +109,12 @@ yaxisNames_5 = ['Char yield (%mass of feedstock as received)',  'Char C yield (%
                'Condensate yield (% mass of feedstock as received)', 'Condensate C yield (%mass of feedstock C, as received,\n adjusted from gas composition)', 
                'Gas yield (% mass of feedstock as received, by difference)', 'Gas C yield (%mass of feedstock C, as received,\n by gas composition)']
 
-yaxisNames_6 = ['CO2 (% of gas composition)',  'CO (% of gas composition)', 
-               'CH4 (% of gas composition)', 'H2 (% of gas composition)', 
-               'CnHm (% of gas composition)', 'C2H4 (% of gas composition)']
+yaxisNames_6 = ['Char yield (%mass of dry, ash free feedstock)', 'Char H yield (%mass feedstock H, dry, ash free)', 
+               'Condensate yield (%mass of dry, ash free feedstock)', 'Condensate H yield (%mass feedstock H, dry, ash free)', 
+               'Gas yield (%mass of dry, ash free feedstock, by difference)', 'Gas H yield (%mass feedstock H, dry, ash free)']
 
-yaxisNames_7 = ['Char yield (%mass of feedstock, dry ash free)',  'Char H yield (%mass of feedstock H, dry ash free)', 
-               'Condensate yield (% mass of feedstock, dry ash free', 'Condensate H yield (%mass of feedstock H, dry ash free,\n adjusted from gas composition)', 
-               'Gas yield (% mass of feedstock, dry ash free, by difference)', 'Gas H yield (%mass of feedstock H, dry ash free,\n by gas composition)']
+
+
 
 variables_group = [1,1,1,1,
                    2,2,2,2,
@@ -168,7 +122,6 @@ variables_group = [1,1,1,1,
                    4,4,4,4,
                    5,5,5,5,
                    6,6,7,7]
-
 ########################################3
 #Primero Escojes las variables a poner en la matriz en yaxisToPlot
 #yaxisToPlot =yaxisToPlot_1+yaxisToPlot_3+yaxisToPlot_5+yaxisToPlot_7
@@ -193,8 +146,7 @@ for i in range(1,len(yaxisToPlot),2):
 
 #print(df[xaxisToPlot[0]].tolist())
 #print(df[ListaVariables])
-extension = '.pdf'
-extensionPNG = '.png'
+
 fig,axs = plt.subplots(nrows=NumberOfRows,ncols=NumberOfColumns,figsize=(14,10))
 #fig.tight_layout()
 i = 0
@@ -205,13 +157,13 @@ for ax in axs.ravel():
     height = 100*np.array(df[ListaVariables[i]].tolist())
     error  = df[ListaVariablesSDev[i]].tolist()
     ax = Tbx.plotBarCharts(ax,columns, height,error,bar_labels=columns,
-                              group_offset = 1.2, group = variables_group )
+                              group_offset = 1.2, group = variables_group)
     if len(bar_labels_x)>0:
         ax.set_xlabel(xaxisToPlot)
     ax.set_ylabel('%')
-    ax.set_title(yaxisNames_7[i], fontsize=11)
+    ax.set_title(yaxisNames_6[i], fontsize=11)
     ax.set_ylim([0,100])
-    titulo = 'Matrix_mass_H_daf'+extensionPNG
+    titulo = 'Matrix_Mass_balance_H_daf'+extensionPNG
     i = i +1
 
 for i in range(0,2):
@@ -224,7 +176,7 @@ for i in range(0,2):
 # axs[6,1].set_xticks(range(0,len(columns)))
 # axs[6,1].set_xticklabels(columns, rotation = 45,fontsize=8)
 # axs[6,0].set_xticks(range(0,len(columns)))
-# axs[6,0].set_xticklabels(columns, rotation = 45,fontsize=8) 
+# axs[6,0].set_xticklabels(columns, rotation = 45,fontsize=8)
 if os.path.exists(OUPUTPLOT):
     print(f"Saving plots in directory {OUPUTPLOT}.")
 else:
