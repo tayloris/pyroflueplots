@@ -5,14 +5,14 @@ A compact tool for visualizing data obtained from pyrolysis experiments.
 ![Customized bar plots](https://github.com/tayloris/pyroflueplots/blob/main/plots/bar_plots.jpg)
 ![Customized dot plots](https://github.com/tayloris/pyroflueplots/blob/main/plots/dot_plots.jpg)
 
-This facilitate data analisis for the following scientific article
+This facilitates data analysis for the following scientific article
 [Industrially relevant pyrolysis of diverse contaminated organic wastes: Gas compositions and emissions to air](https://www.sciencedirect.com/science/article/pii/S0959652623029359)
 
-It is require to have pyton and git installed.
+It is required to have Python, and Git installed.
 
 ## Clone the repository:
 
-Open the command windows ad type
+Open the command windows and type
 ```
 $ cd C:\pathToRepository\
 ```
@@ -23,18 +23,18 @@ $ git clone https://github.com/tayloris/pyroflueplots
 ```
 
 ## First time use:
-Create a python enviroment and install the packages specified in requirements.txt
+Create a Python environment and install the packages specified in requirements.txt
 ```
 $ create a python env
 ```
 
-## Before running an script:
-First Activate your python enviroment
+## Before running a script:
+First Activate your Python environment
 ```
 $ C:\PythonEnv\pythonEnv\Scripts\activate.bat
 ```
 
-Indicate location of the repository source code
+Indicate the location of the repository source code
 ```
 $ set PYTHONPATH=%PYTHONPATH%;C:\pathToDirectory\pyroflueplots\src
 ```
@@ -60,8 +60,8 @@ $ python scripts\examples\autoPlotGF.py
 
 
 For Ubuntu
-1) Activate python enviroment
-`$source /home/manuel/pytonEnvs/pythonPlots/bin/activate` 
+1) Activate Python enviroment
+`$source /pathToPythonEnv/bin/activate` 
 
-2) Indicate location of the repository source code 
-export PYTHONPATH=$PYTHONPATH:/home/manuel/repos/pyroflueplots/src/
+2) Indicate the location of the repository source code 
+export PYTHONPATH=$PYTHONPATH:/PathToRepo/pyroflueplots/src/
