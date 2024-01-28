@@ -1,5 +1,13 @@
 # pyroflueplots
 
+A compact tool for visualizing data obtained from pyrolysis experiments.
+
+![Customized bar plots](https://github.com/tayloris/pyroflueplots/blob/main/plots/bar_plots.jpg)
+![Customized dot plots](https://github.com/tayloris/pyroflueplots/blob/main/plots/dot_plots.jpg)
+
+This facilitate data analisis for the following scientific article
+[Industrially relevant pyrolysis of diverse contaminated organic wastes: Gas compositions and emissions to air](https://www.sciencedirect.com/science/article/pii/S0959652623029359)
+
 It is require to have pyton and git installed.
 
 ## Clone the repository:
